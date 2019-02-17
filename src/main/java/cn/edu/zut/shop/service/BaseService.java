@@ -17,17 +17,11 @@ public interface BaseService<T> {
      */
     void create(T t);
 
-    /**
-     * 删除（批量）
-     *
-     * @param ids
-     */
-    void delete(Long... ids);
 
-    /**
+  /*  *//**
      * 修改
      *
      * @param t
-     */
-    void update(T t);
+     *//*
+    void update(T t);*/
 }

@@ -2,7 +2,7 @@ package cn.edu.zut.shop.service.ret;
 
 import cn.edu.zut.shop.domain.entity.Result;
 
-public class ResultResponse {
+public class ResultFactory {
 
     public static Result buildSuccessResult(Object data) {
         return buidResult(ResultCode.SUCCESS, "成功", data);

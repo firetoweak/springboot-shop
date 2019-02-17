@@ -25,18 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-        userRepository.create(user);
+        userRepository.save(user);
     }
 
-    @Override
-    public void delete(Long... ids) {
-        for (Long id : ids) {
-            userRepository.delete(id);
-        }
-    }
-
-    @Override
-    public void update(User user) {
-        userRepository.update(user);
-    }
 }
