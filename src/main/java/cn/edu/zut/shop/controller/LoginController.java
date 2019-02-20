@@ -1,9 +1,11 @@
 package cn.edu.zut.shop.controller;
 
+import cn.edu.zut.shop.domain.entity.Message;
 import cn.edu.zut.shop.domain.entity.Result;
 import cn.edu.zut.shop.domain.entity.User;
+import cn.edu.zut.shop.service.MessageService;
 import cn.edu.zut.shop.service.UserService;
-import cn.edu.zut.shop.service.ret.ResultFactory;
+import cn.edu.zut.shop.tools.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,8 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private MessageService messageService;
 
     @ResponseBody
     @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
@@ -31,6 +35,7 @@ public class LoginController {
             String message = String.format("登陆失败，详细信息【用户名或密码错误】。");
             return ResultFactory.buildFailResult(message);
         }
-        return ResultFactory.buildSuccessResult("登陆成功。");
+        Message data = messageService.findByUsername(user.getUsername());
+        return ResultFactory.buildSuccessResult(data);
     }
 }

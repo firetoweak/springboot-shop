@@ -18,10 +18,10 @@ public interface BaseService<T> {
     void create(T t);
 
 
-  /*  *//**
+    /**
      * 修改
      *
      * @param t
-     *//*
-    void update(T t);*/
+     */
+    void update(T t);
 }

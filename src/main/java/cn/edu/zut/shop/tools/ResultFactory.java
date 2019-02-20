@@ -1,4 +1,4 @@
-package cn.edu.zut.shop.service.ret;
+package cn.edu.zut.shop.tools;
 
 import cn.edu.zut.shop.domain.entity.Result;
 
