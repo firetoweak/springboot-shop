@@ -19,18 +19,23 @@ public class MessageController {
     @Autowired
     MessageService service;
 
+    /**
+     * 给User对象加入@Valid注解，并在参数中加入BindingResult来获取错误信息。
+     * 在逻辑处理中判断BindingResult知否含有错误信息，如果有错误信息，则直接返回错误信息。
+     * message返回user的个人信息
+     */
     @ResponseBody
     @RequestMapping(value = "/api/messageChange", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-    public Result message(@Valid @RequestBody Message message, BindingResult result){
+    public Result message(@Valid @RequestBody Message message, BindingResult result) {
         if (result.hasErrors()) {
             String data = String.format("信息更改失败，详细信息[%s]。", result.getFieldError().getDefaultMessage());
             return ResultFactory.buildFailResult(data);
         }
-       if(null!=service.findByUsername(message.getUsername())){
-           service.update(message);
-       }else {
-           service.create(message);
-       }
+        if (null != service.findByUsername(message.getUsername())) {
+            service.update(message);
+        } else {
+            service.create(message);
+        }
         return ResultFactory.buildSuccessResult(message);
     }
 }

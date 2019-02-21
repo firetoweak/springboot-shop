@@ -22,17 +22,22 @@ public class LoginController {
     @Autowired
     private MessageService messageService;
 
+    /**
+     * 给User对象加入@Valid注解，并在参数中加入BindingResult来获取错误信息。
+     * 在逻辑处理中判断BindingResult知否含有错误信息，如果有错误信息，则直接返回错误信息。
+     * data返回user的个人信息
+     */
     @ResponseBody
     @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public Result login(@Valid @RequestBody User user, BindingResult result) {
         if (result.hasErrors()) {
-            String message = String.format("登陆失败，详细信息[%s]。", result.getFieldError().getDefaultMessage());
+            String message = String.format("登陆失败，详细信息[%s]。", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
             return ResultFactory.buildFailResult(message);
         }
-        User u = null;
-        u = userService.findByName(user.getUsername());
-        if (!Objects.equals(u.getUsername(), user.getUsername()) || !Objects.equals(u.getPassword(), user.getPassword())) {
-            String message = String.format("登陆失败，详细信息【用户名或密码错误】。");
+        User userFromMysql = null;
+        userFromMysql = userService.findByName(user.getUsername());
+        if (!Objects.equals(userFromMysql.getUsername(), user.getUsername()) || !Objects.equals(userFromMysql.getPassword(), user.getPassword())) {
+            String message = String.format("登陆失败，详细信息【用户名或密码错误】。", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
             return ResultFactory.buildFailResult(message);
         }
         Message data = messageService.findByUsername(user.getUsername());

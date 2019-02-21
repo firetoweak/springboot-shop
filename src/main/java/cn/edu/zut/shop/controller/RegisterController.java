@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import static java.lang.String.format;
+
 @Controller
 public class RegisterController {
 
@@ -24,7 +26,7 @@ public class RegisterController {
     @RequestMapping(value = "/api/register", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     public Result register(@Valid @RequestBody User user, BindingResult result) {
         if (result.hasErrors()) {
-            String message = String.format( result.getFieldError().getDefaultMessage());
+            String message = format("注册失败", result.getFieldError().getDefaultMessage());
             return ResultFactory.buildFailResult(message);
         }
         userService.create(user);
