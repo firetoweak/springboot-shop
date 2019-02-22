@@ -13,5 +13,5 @@ public interface MessageService extends BaseService<Message> {
     /**
      * 用username查询
      */
-    Message findByUsername(String usrname);
+    Message findByUsername(String username);
 }

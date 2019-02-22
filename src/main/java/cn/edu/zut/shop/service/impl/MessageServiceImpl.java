@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class MessageServiceImpl implements MessageService {
     @Autowired
-    MessageRepository messageRepository;
+    private MessageRepository messageRepository;
 
     @Override
     public List<Message> findAll() {

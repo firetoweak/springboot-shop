@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @Controller
 public class MessageController {
     @Autowired
-    MessageService service;
+    private MessageService service;
 
     /**
      * 给User对象加入@Valid注解，并在参数中加入BindingResult来获取错误信息。
