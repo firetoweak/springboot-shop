@@ -18,10 +18,10 @@ public class Goods implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer count;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Integer price;
 
     @Column(unique = true)
@@ -76,5 +76,16 @@ public class Goods implements Serializable {
 
     public void setClassification(String classification) {
         this.classification = classification;
+    }
+
+    public Goods(String name, Integer count, Integer price, String image, String classification) {
+        this.name = name;
+        this.count = count;
+        this.price = price;
+        this.image = image;
+        this.classification = classification;
+    }
+
+    public Goods() {
     }
 }

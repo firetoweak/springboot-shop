@@ -40,7 +40,11 @@ public class LoginController {
             String message = String.format("登陆失败，详细信息【用户名或密码错误】。", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
             return ResultFactory.buildFailResult(message);
         }
-        Message data = messageService.findByUsername(user.getUsername());
+        Message data = new Message();
+        if(null!=messageService.findByUsername(user.getUsername())){
+             data = messageService.findByUsername(user.getUsername());
+        }
+        data.setUsername(user.getUsername());
         return ResultFactory.buildSuccessResult(data);
     }
 }

@@ -13,16 +13,16 @@ public class Message implements Serializable {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String sex;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String address;
 
     public Long getId() {
@@ -71,5 +71,16 @@ public class Message implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Message(String username, String name, String sex, String email, String address) {
+        this.username = username;
+        this.name = name;
+        this.sex = sex;
+        this.email = email;
+        this.address = address;
+    }
+
+    public Message() {
     }
 }
