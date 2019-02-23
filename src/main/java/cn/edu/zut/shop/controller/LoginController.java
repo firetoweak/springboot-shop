@@ -34,10 +34,10 @@ public class LoginController {
             String message = String.format("登陆失败，详细信息[%s]。", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
             return ResultFactory.buildFailResult(message);
         }
-        User userFromMysql = null;
+        User userFromMysql = new User();
         userFromMysql = userService.findByName(user.getUsername());
-        if (!Objects.equals(userFromMysql.getUsername(), user.getUsername()) || !Objects.equals(userFromMysql.getPassword(), user.getPassword())) {
-            String message = String.format("登陆失败，详细信息【用户名或密码错误】。", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
+        if (null == userFromMysql || !Objects.equals(userFromMysql.getPassword(), user.getPassword())) {
+            String message = "登陆失败，用户名或密码不正确！";
             return ResultFactory.buildFailResult(message);
         }
         Message data = new Message();

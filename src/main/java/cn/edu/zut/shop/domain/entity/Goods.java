@@ -27,7 +27,7 @@ public class Goods implements Serializable {
     @Column(unique = true)
     private String image;
 
-    @Column(unique = true)
+    @Column()
     private String classification;
 
     public Long getId() {

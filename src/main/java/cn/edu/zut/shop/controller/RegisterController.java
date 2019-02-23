@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import java.util.Objects;
+
 import static java.lang.String.format;
 
 @Controller
@@ -28,6 +30,11 @@ public class RegisterController {
         if (result.hasErrors()) {
             String message = format("注册失败", result.getFieldError().getDefaultMessage());
             return ResultFactory.buildFailResult(message);
+        }
+        User userFromMysql = new User();
+        userFromMysql = userService.findByName(user.getUsername());
+        if(Objects.equals(userFromMysql.getUsername(),user.getUsername())){
+            return ResultFactory.buildFailResult("注册失败，用户名已存在！");
         }
         userService.create(user);
         return ResultFactory.buildSuccessResult("注册成功。");
