@@ -41,8 +41,8 @@ public class LoginController {
             return ResultFactory.buildFailResult(message);
         }
         Message data = new Message();
-        if(null!=messageService.findByUsername(user.getUsername())){
-             data = messageService.findByUsername(user.getUsername());
+        if (null != messageService.findByUsername(user.getUsername())) {
+            data = messageService.findByUsername(user.getUsername());
         }
         data.setUsername(user.getUsername());
         return ResultFactory.buildSuccessResult(data);

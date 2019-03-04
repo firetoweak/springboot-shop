@@ -17,6 +17,9 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    @Transient
+    private String changePass;
+
     public Long getId() {
         return id;
     }
@@ -39,6 +42,16 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getChangePass() { return changePass; }
+
+    public void setChangePass(String changePass) { this.changePass = changePass; }
+
+    public User(String username, String password, String changePass) {
+        this.username = username;
+        this.password = password;
+        this.changePass = changePass;
     }
 
     public User(String username, String password) {

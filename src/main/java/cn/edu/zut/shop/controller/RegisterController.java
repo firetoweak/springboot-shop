@@ -33,7 +33,7 @@ public class RegisterController {
         }
         User userFromMysql = new User();
         userFromMysql = userService.findByName(user.getUsername());
-        if(Objects.equals(userFromMysql.getUsername(),user.getUsername())){
+        if(null != userFromMysql ){
             return ResultFactory.buildFailResult("注册失败，用户名已存在！");
         }
         userService.create(user);
